@@ -1,36 +1,55 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <div>
-      <p>
-        If Element is successfully added to this project, you'll see an
-        <code v-text="'<el-button>'"></code>
-        below
-      </p>
-      <el-button>el-button</el-button>
+    <div id="app">
+        <keep-alive>
+            <router-view v-if="$route.meta.keepAlive"></router-view>
+        </keep-alive>
+        <router-view v-if="!$route.meta.keepAlive">
+        </router-view>
     </div>
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
-</template>
-
+</template> 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
 export default {
-  name: "app",
-  components: {
-    HelloWorld
-  }
-};
-</script>
-
+    name: "app",
+    data() {
+        return {
+            isRouterAlive: true
+        }
+    },
+    methods: {
+        reload() {
+            this.isRouterAlive = false;
+            this.$nextTick(() => (this.isRouterAlive = true))
+        }
+    }
+}
+</script> 
 <style>
+body {
+    margin: 0px;
+    padding: 0px;
+    background: #1f2d3d;
+    font-family: "NSimsun", Arial;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+}
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+    min-width: 1200px;
+}
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+@media (max-width: 1400px) {
+    body {
+        font-size: 12px;
+    }
 }
 </style>

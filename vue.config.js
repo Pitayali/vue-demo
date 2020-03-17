@@ -4,5 +4,6 @@ module.exports = {
       host: 'localhost',
       https: false,
       open: true // 配置是否自动启动浏览器
-    }
+    },
+    lintOnSave: false
   }
